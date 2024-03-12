@@ -1,19 +1,39 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
     // experimental: {
-    //     wasmMemoryLimit: 512,// Adjust as needed
-    //     appDir: true,
     //     swcPlugins: [
-    //         ["next-superjson-plugin", {}]
-    //     ]
+    //         // Example: Enable the "react-intl" plugin for internationalization
+    //         ['react-intl', {}],
+    //       ],
     // },
     images: {
-        domains: [
-            "res.cloundinary.com",
-            "avtars.githubusercontent.com",
-            "lh3.googleusercontent.com",
-            "lh3.facebookusercontent.com"
-        ]
+        remotePatterns: [
+            {
+                protocol: 'http',
+                hostname: 'github.com'
+            },
+            {
+                protocol: 'http',
+                hostname: 'raw.githubusercontent.com'
+            },
+            {
+                protocol: 'http',
+                hostname: 'google.com'
+            },
+            {
+                protocol: 'http',
+                hostname: 'raw.googleusercontent.com'
+            },
+            {
+                protocol: 'http',
+                hostname: 'facebook.com'
+            },
+            {
+                protocol: 'http',
+                hostname: 'raw.facebookusercontent.com'
+            }
+        ],
     }
 };
 

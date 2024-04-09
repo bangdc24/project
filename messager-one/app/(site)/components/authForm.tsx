@@ -12,9 +12,8 @@ import AuthSocialButton from './AuthSocialButton';
 import Button from "@/app/components/Button";
 import { toast } from "react-hot-toast";
 
-
 type Variant = 'LOGIN' | 'REGISTER';
-// api/auth/callback/credentials
+
 const AuthForm = () => {
   const session = useSession();
   const router = useRouter();
@@ -23,7 +22,7 @@ const AuthForm = () => {
 
   useEffect(() => {
     if (session?.status === 'authenticated') {
-      router.push('/users')
+      router.push('/conversations')
     }
   }, [session?.status, router]);
 
@@ -48,7 +47,7 @@ const AuthForm = () => {
       password: ''
     }
   });
-  // /app/api/register
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
   
@@ -64,7 +63,7 @@ const AuthForm = () => {
         }
 
         if (callback?.ok) {
-          router.push('/users')
+          router.push('/conversations')
         }
       })
       .catch(() => toast.error('Something went wrong!'))
@@ -81,9 +80,8 @@ const AuthForm = () => {
           toast.error('Invalid credentials!');
         }
 
-        if (callback?.ok && !callback?.error) {
-          toast.success('Logged in!')
-          router.push('/users')
+        if (callback?.ok) {
+          router.push('/conversations')
         }
       })
       .finally(() => setIsLoading(false))
@@ -99,9 +97,8 @@ const AuthForm = () => {
           toast.error('Invalid credentials!');
         }
 
-        if (callback?.ok && !callback?.error) {
-          toast.success('Logged in!')
-          router.push('/users')
+        if (callback?.ok) {
+          router.push('/conversations')
         }
       })
       .finally(() => setIsLoading(false));
@@ -152,7 +149,7 @@ const AuthForm = () => {
             type="password"
           />
           <div>
-            <Button disabled={isLoading} fullWidth >
+            <Button disabled={isLoading} fullWidth type="submit">
               {variant === 'LOGIN' ? 'Sign in' : 'Register'}
             </Button>
           </div>

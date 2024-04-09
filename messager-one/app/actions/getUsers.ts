@@ -1,30 +1,29 @@
-import { Prisma } from "@prisma/client/extension";
-
+import prisma from "@/app/libs/prismadb";
 import getSession from "./getSession";
 
-const getuser = async () => {
-    const session = await getSession();
+const getUsers = async () => {
+  const session = await getSession();
 
-    if (!session?.user?.email){
-        return [];
-    }
+  if (!session?.user?.email) {
+    return [];
+  }
 
-    try{
-        const users = await prisma?.user.findMany({
-            orderBy: {
-                createdAt: 'desc',
-            },
-            where: {
-                NOT:{
-                    email: session.user.email
-                }
-            }
-        });
-        return users;
-    }catch (error: any){
-        return [];
-    }
+  try {
+    const users = await prisma.user.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      },
+      where: {
+        NOT: {
+          email: session.user.email
+        }
+      }
+    });
 
-}
+    return users;
+  } catch (error: any) {
+    return [];
+  }
+};
 
-export default getSession;
+export default getUsers;

@@ -56,7 +56,7 @@ const Body: React.FC<BodyProps> = ({ initialMessages = [] }) => {
     pusherClient.bind('message:update', updateMessageHandler);
 
     return () => {
-    pusherClient.unsubscribe(conversationId)
+      pusherClient.unsubscribe(conversationId)
       pusherClient.unbind('messages:new', messageHandler)
       pusherClient.unbind('message:update', updateMessageHandler)
     }
@@ -76,4 +76,4 @@ const Body: React.FC<BodyProps> = ({ initialMessages = [] }) => {
   );
 }
  
-export default Body;
+export default Body; 
